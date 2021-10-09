@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SamahModelStoreContainer" CdmEntityContainer="MyPushNotificationEntities">
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="SamahModel.Contact">
+        <MappingFragment StoreEntitySet="Contacts">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="G_Branch">
+      <EntityTypeMapping TypeName="SamahModel.G_Branch">
+        <MappingFragment StoreEntitySet="G_Branch">
+          <ScalarProperty Name="NameE" ColumnName="NameE" />
+          <ScalarProperty Name="NameA" ColumnName="NameA" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SessionStorages">
+      <EntityTypeMapping TypeName="SamahModel.SessionStorage">
+        <MappingFragment StoreEntitySet="SessionStorage">
+          <ScalarProperty Name="Id_Cust" ColumnName="Id_Cust" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="TurnNumber" ColumnName="TurnNumber" />
+          <ScalarProperty Name="page" ColumnName="page" />
+          <ScalarProperty Name="TR_Type" ColumnName="TR_Type" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID_Device" ColumnName="ID_Device" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Hagz">
+      <EntityTypeMapping TypeName="SamahModel.Table_Hagz">
+        <MappingFragment StoreEntitySet="Table_Hagz">
+          <ScalarProperty Name="RegistredTime" ColumnName="RegistredTime" />
+          <ScalarProperty Name="StatusFlag" ColumnName="StatusFlag" />
+          <ScalarProperty Name="cheak" ColumnName="cheak" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Num" ColumnName="Num" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_LastNum">
+      <EntityTypeMapping TypeName="SamahModel.Table_LastNum">
+        <MappingFragment StoreEntitySet="Table_LastNum">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="LastNum" ColumnName="LastNum" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Server">
+      <EntityTypeMapping TypeName="SamahModel.Table_Server">
+        <MappingFragment StoreEntitySet="Table_Server">
+          <ScalarProperty Name="StatusFlag" ColumnName="StatusFlag" />
+          <ScalarProperty Name="cheak" ColumnName="cheak" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Num" ColumnName="Num" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Tim_work">
+      <EntityTypeMapping TypeName="SamahModel.Table_Tim_work">
+        <MappingFragment StoreEntitySet="Table_Tim_work">
+          <ScalarProperty Name="Cheak" ColumnName="Cheak" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

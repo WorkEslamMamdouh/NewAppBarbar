@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SamahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="G_Branch">
+          <Key>
+            <PropertyRef Name="BranchCode" />
+          </Key>
+          <Property Name="BranchCode" Type="int" Nullable="false" />
+          <Property Name="NameA" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SessionStorage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="ID_Device" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="TR_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="page" Type="int" />
+          <Property Name="TurnNumber" Type="int" />
+          <Property Name="ServiceId" Type="int" />
+          <Property Name="Id_Cust" Type="int" />
+        </EntityType>
+        <EntityType Name="Table_Hagz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="Num" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Message" Type="nvarchar" MaxLength="50" />
+          <Property Name="cheak" Type="bit" />
+          <Property Name="StatusFlag" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistredTime" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_LastNum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="LastNum" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_Server">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Num" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Message" Type="nvarchar" MaxLength="50" />
+          <Property Name="cheak" Type="bit" />
+          <Property Name="StatusFlag" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Table_Tim_work">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchCode" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cheak" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="SamahModelStoreContainer">
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="G_Branch" EntityType="Self.G_Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SessionStorage" EntityType="Self.SessionStorage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Hagz" EntityType="Self.Table_Hagz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_LastNum" EntityType="Self.Table_LastNum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Server" EntityType="Self.Table_Server" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Tim_work" EntityType="Self.Table_Tim_work" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SamahModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MyPushNotificationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="SamahModel.Contact" />
+          <EntitySet Name="G_Branch" EntityType="SamahModel.G_Branch" />
+          <EntitySet Name="SessionStorages" EntityType="SamahModel.SessionStorage" />
+          <EntitySet Name="Table_Hagz" EntityType="SamahModel.Table_Hagz" />
+          <EntitySet Name="Table_LastNum" EntityType="SamahModel.Table_LastNum" />
+          <EntitySet Name="Table_Server" EntityType="SamahModel.Table_Server" />
+          <EntitySet Name="Table_Tim_work" EntityType="SamahModel.Table_Tim_work" />
+        </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddedOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="G_Branch">
+          <Key>
+            <PropertyRef Name="BranchCode" />
+          </Key>
+          <Property Name="BranchCode" Type="Int32" Nullable="false" />
+          <Property Name="NameA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SessionStorage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="ID_Device" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TR_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="page" Type="Int32" />
+          <Property Name="TurnNumber" Type="Int32" />
+          <Property Name="ServiceId" Type="Int32" />
+          <Property Name="Id_Cust" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Table_Hagz">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="Num" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cheak" Type="Boolean" />
+          <Property Name="StatusFlag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistredTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_LastNum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="LastNum" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Server">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Num" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cheak" Type="Boolean" />
+          <Property Name="StatusFlag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table_Tim_work">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchCode" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cheak" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SamahModelStoreContainer" CdmEntityContainer="MyPushNotificationEntities">
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="SamahModel.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="G_Branch">
+            <EntityTypeMapping TypeName="SamahModel.G_Branch">
+              <MappingFragment StoreEntitySet="G_Branch">
+                <ScalarProperty Name="NameE" ColumnName="NameE" />
+                <ScalarProperty Name="NameA" ColumnName="NameA" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SessionStorages">
+            <EntityTypeMapping TypeName="SamahModel.SessionStorage">
+              <MappingFragment StoreEntitySet="SessionStorage">
+                <ScalarProperty Name="Id_Cust" ColumnName="Id_Cust" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="TurnNumber" ColumnName="TurnNumber" />
+                <ScalarProperty Name="page" ColumnName="page" />
+                <ScalarProperty Name="TR_Type" ColumnName="TR_Type" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID_Device" ColumnName="ID_Device" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Hagz">
+            <EntityTypeMapping TypeName="SamahModel.Table_Hagz">
+              <MappingFragment StoreEntitySet="Table_Hagz">
+                <ScalarProperty Name="RegistredTime" ColumnName="RegistredTime" />
+                <ScalarProperty Name="StatusFlag" ColumnName="StatusFlag" />
+                <ScalarProperty Name="cheak" ColumnName="cheak" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Num" ColumnName="Num" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_LastNum">
+            <EntityTypeMapping TypeName="SamahModel.Table_LastNum">
+              <MappingFragment StoreEntitySet="Table_LastNum">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="LastNum" ColumnName="LastNum" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Server">
+            <EntityTypeMapping TypeName="SamahModel.Table_Server">
+              <MappingFragment StoreEntitySet="Table_Server">
+                <ScalarProperty Name="StatusFlag" ColumnName="StatusFlag" />
+                <ScalarProperty Name="cheak" ColumnName="cheak" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Num" ColumnName="Num" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Tim_work">
+            <EntityTypeMapping TypeName="SamahModel.Table_Tim_work">
+              <MappingFragment StoreEntitySet="Table_Tim_work">
+                <ScalarProperty Name="Cheak" ColumnName="Cheak" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
