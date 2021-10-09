@@ -35,8 +35,14 @@
     <input type="hidden" id="GetActionUrl" name="name" value="@Url.Action("GetActionUrl","ClientTools")" />
     <input type="hidden" id="GetAPIUrl" name="name" value="@System.Configuration.ConfigurationManager.AppSettings["ServiceUrl"]" />
     @RenderBody()
+     
+     
+   
 
-
+    <select id="PushMessage" name="" class="newsletter-field" style="height: 1%;display: none;">
+        <option value="0">الرساله</option>
+        <option value="1">تم التعديل</option>
+    </select>
 
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -182,20 +188,47 @@
 
 
 
+                var notificationHub = $.connection.notificationHub;
+                $.connection.hub.start().done(function () {
+                    console.log('Notification hub started');
+                });
+                //signalr method for push server message to client
+                notificationHub.client.notify = function (message) {
+                    if (message && message.toLowerCase() == "added") {
+                        //debugger
+                        //alert("updateNotificationCount");
+
+                        //alert(sessionStorage.getItem("page"))
+
+                        var page = sessionStorage.getItem("page");
+
+                     
 
 
-            var notificationHub = $.connection.notificationHub;
-            $.connection.hub.start().done(function () {
-                console.log('Notification hub started');
-            });
-            //signalr method for push server message to client
-            notificationHub.client.notify = function (message) {
-                if (message && message.toLowerCase() == "added") {
-                    //debugger
-                    //alert("updateNotificationCount");
-                    start()
+
+                        if (page == '5') {
+
+                            
+                            $('#PushMessage option[value=1]').prop('selected', 'selected').change();
+                            var CheakBranch = sessionStorage.getItem("CheakBranch");
+                            if (CheakBranch == 'true') {
+                                start();
+                                sessionStorage.setItem("CheakBranch", "");    
+                            }
+
+                           
+                        }
+
+
+                     
+                    }
                 }
-            }
+
+         
+
+
+          
+
         })
 
 
@@ -203,10 +236,10 @@
         function start() {
             //Push.create('Hello World!')
 
-            Push.create("Hello world!", {
-                body: "How's it hangin'?",
+            Push.create("( "+$("#txt_Branch option:selected").text() + " ) أسمه أيه؟ ", {
+                body: "" + $('#Home_Num_Dor').html() + "",
                 icon: '../images/logo_samah_New.png',
-                timeout: 4000,
+                timeout: 6000,
                 onClick: function () {
                     window.focus();
                     this.close();

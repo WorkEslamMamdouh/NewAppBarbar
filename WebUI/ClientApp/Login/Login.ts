@@ -27,6 +27,11 @@ namespace Login {
 
     var txtName: HTMLInputElement;
     var txtPhone: HTMLInputElement;
+    var PushMessage: HTMLSelectElement;
+  
+
+
+    
     var txt_Branch: HTMLSelectElement;
 
     var submit: HTMLButtonElement;
@@ -73,7 +78,12 @@ namespace Login {
     }
     function InitalizeControls() {
         txtName = document.getElementById("txtName") as HTMLInputElement;
-        txtPhone = document.getElementById("txtPhone") as HTMLInputElement;
+        txtPhone = document.getElementById("txtPhone") as HTMLInputElement;   
+
+        
+        PushMessage = document.getElementById("PushMessage") as HTMLSelectElement;
+
+        
 
         submit = document.getElementById("submit") as HTMLButtonElement;
         btnMan = document.getElementById("btnMan") as HTMLButtonElement;
@@ -96,6 +106,94 @@ namespace Login {
         butConfirm.onclick = butConfirm_onclick;
         butRemove.onclick = butRemove_onclick;
         butBack.onclick = butBack_onclick;
+        PushMessage.onchange = PushMessage_onchange;
+    }
+
+    function PushMessage_onchange() {
+
+ 
+
+
+        GetNotification();
+
+        let TurnNumber = sessionStorage.getItem("TurnNumber");
+        $('#label_Num').html(TurnNumber);
+
+
+
+        //alert("تم التعديل");
+    }
+
+    function GetNotification() {
+
+        Cuts_Display_App = new Display_App();
+        let ID = sessionStorage.getItem("Id");
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("Home", "GetAll_App"),
+            data: { TR_Type: TR_Type, ID: ID, ID_Device: ID_Device, BranchCode: BranchCode },
+            success: (d) => {
+                debugger;
+                let result = d as BaseResponse;
+                if (result.IsSuccess) {
+                    debugger;
+                    Cuts_Display_App = result.Response as Display_App;
+                    GetStat = Cuts_Display_App.GetSts as GetStatus;
+                    let id_Corse = 1;
+                    Corse_ON_Active();
+                    for (var i = 0; i < Cuts_Display_App.Table_Hagz.length; i++) {
+                        if (Cuts_Display_App.Table_Hagz[i].cheak == true) {
+
+                            Corse_Is_Active(id_Corse, Cuts_Display_App.Table_Hagz, i);
+
+                            id_Corse++;
+
+                            flag_corse = true;
+                        }
+
+                    }
+
+                    $('#label_Num').html(GetStat.TrNo.toString());
+                    var message = 'باقي علي دورك : ' + GetStat.StatusName.toString() + '';
+
+                    if (message == $('#Home_Num_Dor').html() ) {
+                        sessionStorage.setItem("CheakBranch", "");    
+                    }
+                    else {
+                        sessionStorage.setItem("CheakBranch", "true");   
+                    }
+
+
+                    $('#Home_Num_Dor').html(message);
+
+                    if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
+
+                        let page = sessionStorage.getItem("page");
+
+                        if (page == '5') {
+
+                            alert('الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري')
+
+                            $('#Home_Num_Dor').html('باقي علي دورك : يمكنك الدخول');
+
+                            sessionStorage.setItem("page", "2");
+                            sessionStorage.setItem("TR_Type", "");
+                            sessionStorage.setItem("Id", "");
+                            LoadPage();
+
+                            //txtName.value = '';
+                            //txtPhone.value = '';
+
+                        }
+
+                    }
+                    
+
+
+                }
+
+            }
+        });
 
     }
 
@@ -166,7 +264,7 @@ namespace Login {
                         txtName.value = '';
                         txtPhone.value = '';
                         LoadPage();
-
+                        
                     }
 
 
@@ -301,7 +399,7 @@ namespace Login {
 
             Refresh();
 
-            setTime();
+            //setTime();
 
         }
         else {
@@ -559,7 +657,7 @@ namespace Login {
 
 
 
-            setTime();
+            //setTime();
 
 
         }
@@ -837,6 +935,7 @@ namespace Login {
     }
 
 
+    
 }
 
 

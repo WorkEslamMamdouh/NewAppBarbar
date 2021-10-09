@@ -18,6 +18,7 @@ var Login;
     var sys = new SystemTools();
     var txtName;
     var txtPhone;
+    var PushMessage;
     var txt_Branch;
     var submit;
     var btnMan;
@@ -57,6 +58,7 @@ var Login;
     function InitalizeControls() {
         txtName = document.getElementById("txtName");
         txtPhone = document.getElementById("txtPhone");
+        PushMessage = document.getElementById("PushMessage");
         submit = document.getElementById("submit");
         btnMan = document.getElementById("btnMan");
         btnChild = document.getElementById("btnChild");
@@ -74,6 +76,60 @@ var Login;
         butConfirm.onclick = butConfirm_onclick;
         butRemove.onclick = butRemove_onclick;
         butBack.onclick = butBack_onclick;
+        PushMessage.onchange = PushMessage_onchange;
+    }
+    function PushMessage_onchange() {
+        GetNotification();
+        var TurnNumber = sessionStorage.getItem("TurnNumber");
+        $('#label_Num').html(TurnNumber);
+        //alert("تم التعديل");
+    }
+    function GetNotification() {
+        Cuts_Display_App = new Display_App();
+        var ID = sessionStorage.getItem("Id");
+        Ajax.Callsync({
+            type: "Get",
+            url: sys.apiUrl("Home", "GetAll_App"),
+            data: { TR_Type: TR_Type, ID: ID, ID_Device: ID_Device, BranchCode: BranchCode },
+            success: function (d) {
+                debugger;
+                var result = d;
+                if (result.IsSuccess) {
+                    debugger;
+                    Cuts_Display_App = result.Response;
+                    GetStat = Cuts_Display_App.GetSts;
+                    var id_Corse = 1;
+                    Corse_ON_Active();
+                    for (var i = 0; i < Cuts_Display_App.Table_Hagz.length; i++) {
+                        if (Cuts_Display_App.Table_Hagz[i].cheak == true) {
+                            Corse_Is_Active(id_Corse, Cuts_Display_App.Table_Hagz, i);
+                            id_Corse++;
+                            flag_corse = true;
+                        }
+                    }
+                    $('#label_Num').html(GetStat.TrNo.toString());
+                    var message = 'باقي علي دورك : ' + GetStat.StatusName.toString() + '';
+                    if (message == $('#Home_Num_Dor').html()) {
+                        sessionStorage.setItem("CheakBranch", "");
+                    }
+                    else {
+                        sessionStorage.setItem("CheakBranch", "true");
+                    }
+                    $('#Home_Num_Dor').html(message);
+                    if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
+                        var page = sessionStorage.getItem("page");
+                        if (page == '5') {
+                            alert('الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري');
+                            $('#Home_Num_Dor').html('باقي علي دورك : يمكنك الدخول');
+                            sessionStorage.setItem("page", "2");
+                            sessionStorage.setItem("TR_Type", "");
+                            sessionStorage.setItem("Id", "");
+                            LoadPage();
+                        }
+                    }
+                }
+            }
+        });
     }
     function Get_Branch() {
         Ajax.Callsync({
@@ -210,7 +266,6 @@ var Login;
             $('#butRemove').removeClass('display_none');
             $('#txt_titel').html('معرفة دورك');
             Refresh();
-            setTime();
         }
         else {
             clearTimeout(MyTimer);
@@ -367,7 +422,6 @@ var Login;
             $('#txt_titel').html('معرفة دورك');
             insert_Cust();
             sessionStorage.setItem("page", "5");
-            setTime();
         }
         else {
         }
