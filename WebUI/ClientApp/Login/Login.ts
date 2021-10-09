@@ -166,24 +166,45 @@ namespace Login {
 
                     $('#Home_Num_Dor').html(message);
 
-                    if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
+
+
+                    if (GetStat.StatusName == "لقد انتهيت من الحلاقه نشكرك علي زيارتك") {
 
                         let page = sessionStorage.getItem("page");
 
                         if (page == '5') {
 
-                            alert('الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري')
-
-                            $('#Home_Num_Dor').html('باقي علي دورك : يمكنك الدخول');
+                            alert('لقد انتهيت من الحلاقه نشكرك علي زيارتك')
+                                                                                           
+                            $('#Home_Num_Dor').html('لقد انتهيت من الحلاقه نشكرك علي زيارتك');
 
                             sessionStorage.setItem("page", "2");
                             sessionStorage.setItem("TR_Type", "");
                             sessionStorage.setItem("Id", "");
                             LoadPage();
 
-                            //txtName.value = '';
-                            //txtPhone.value = '';
+                            
+                        }
 
+                    }
+
+
+                    if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
+
+                        let page = sessionStorage.getItem("page");
+
+                        if (page == '5') {
+
+                            alert('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري')
+
+                         
+                            $('#Home_Num_Dor').html('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري')
+
+                            sessionStorage.setItem("page", "2");
+                            sessionStorage.setItem("TR_Type", "");
+                            sessionStorage.setItem("Id", "");
+                            LoadPage();
+                           
                         }
 
                     }
@@ -859,7 +880,9 @@ namespace Login {
 
                             alert('الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري')
 
+                       
                             $('#Home_Num_Dor').html('باقي علي دورك : يمكنك الدخول');
+
 
                             sessionStorage.setItem("page", "2");
                             sessionStorage.setItem("TR_Type", "");

@@ -116,11 +116,22 @@ var Login;
                         sessionStorage.setItem("CheakBranch", "true");
                     }
                     $('#Home_Num_Dor').html(message);
+                    if (GetStat.StatusName == "لقد انتهيت من الحلاقه نشكرك علي زيارتك") {
+                        var page = sessionStorage.getItem("page");
+                        if (page == '5') {
+                            alert('لقد انتهيت من الحلاقه نشكرك علي زيارتك');
+                            $('#Home_Num_Dor').html('لقد انتهيت من الحلاقه نشكرك علي زيارتك');
+                            sessionStorage.setItem("page", "2");
+                            sessionStorage.setItem("TR_Type", "");
+                            sessionStorage.setItem("Id", "");
+                            LoadPage();
+                        }
+                    }
                     if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
                         var page = sessionStorage.getItem("page");
                         if (page == '5') {
-                            alert('الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري');
-                            $('#Home_Num_Dor').html('باقي علي دورك : يمكنك الدخول');
+                            alert('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري');
+                            $('#Home_Num_Dor').html('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري');
                             sessionStorage.setItem("page", "2");
                             sessionStorage.setItem("TR_Type", "");
                             sessionStorage.setItem("Id", "");
