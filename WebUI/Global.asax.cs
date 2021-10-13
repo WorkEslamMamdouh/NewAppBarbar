@@ -12,8 +12,8 @@ namespace WebUI
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        //string con = ConfigurationManager.ConnectionStrings["sqlConString"].ConnectionString;
-        string con = "data source=.;initial catalog=Samah;user id=sa;password=619619;";
+        string con = ConfigurationManager.ConnectionStrings["sqlConString"].ConnectionString;
+        //string con = "data source=.;initial catalog=Samah;user id=sa;password=619619;";
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
