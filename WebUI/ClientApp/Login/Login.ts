@@ -22,8 +22,7 @@ namespace Login {
 
     var Details_Employee: Array<Table_Tim_work> = new Array<Table_Tim_work>();
     var Details_API: Array<Table_Hagz> = new Array<Table_Hagz>();
-    var Details_Check: Array<Reservations> = new Array<Reservations>();
-    var sys: SystemTools = new SystemTools();
+    var Details_Check: Array<Reservations> = new Array<Reservations>();    
 
     var txtName: HTMLInputElement;
     var txtPhone: HTMLInputElement;
@@ -129,15 +128,14 @@ namespace Login {
         Cuts_Display_App = new Display_App();
         let ID = sessionStorage.getItem("Id");
         Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Home", "GetAll_App"),
+            type: "Get",                 
+            url: Url.Action("GetAll_App", "Home"),
             data: { TR_Type: TR_Type, ID: ID, ID_Device: ID_Device, BranchCode: BranchCode },
             success: (d) => {
                 debugger;
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    debugger;
-                    Cuts_Display_App = result.Response as Display_App;
+                let result = d;      
+
+                    Cuts_Display_App = result as Display_App;
                     GetStat = Cuts_Display_App.GetSts as GetStatus;
                     let id_Corse = 1;
                     Corse_ON_Active();
@@ -211,7 +209,7 @@ namespace Login {
                     
 
 
-                }
+              
 
             }
         });
@@ -219,21 +217,19 @@ namespace Login {
     }
 
     function Get_Branch() {
-
+        debugger
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "GetBranch"),
+            url: Url.Action("GetBranch", "Home"),
             success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    Branch = result.Response as Array<G_Branch>;
-                   
-                    DocumentActions.FillCombowithdefult(Branch, txt_Branch, "BranchCode", "NameA", "اختار الفرع");
+                debugger
+                let result = d 
+            
+                Branch = result as Array<G_Branch>;
 
+                DocumentActions.FillCombowithdefult(Branch, txt_Branch, "BranchCode", "NameA", "اختار الفرع");
 
-                    //BranchCode = Number(txt_Branch.value);
-
-                }
+               
 
             }
         });
@@ -245,13 +241,13 @@ namespace Login {
 
 
         Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Home", "Get_Uesr_Session"),
+            type: "Get",            
+            url: Url.Action("Get_Uesr_Session", "Home"),
             data: { ID_Device: ID_Device },
             success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    SessionStorages = result.Response as Array<SessionStorage>;
+                let result = d ;
+               
+                    SessionStorages = result as Array<SessionStorage>;
                     debugger
                     if (SessionStorages.length > 0) {
 
@@ -289,7 +285,7 @@ namespace Login {
                     }
 
 
-                }
+               
 
             }
         });
@@ -327,16 +323,15 @@ namespace Login {
     function cheakcloseDay() {
                           
         Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Home", "cheakcloseDay"),
+            type: "Get",          
+            url: Url.Action("cheakcloseDay", "Home"),
             data: { BranchCode: Number(txt_Branch.value) },    
             success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
+                let result = d;
 
-                    close = result.Response;
+                    close = result;
 
-                }
+               
             }
         });
 
@@ -500,12 +495,11 @@ namespace Login {
         BranchCode = Number(txt_Branch.value);
         
         Ajax.Callsync({
-            type: "Post",
-            url: sys.apiUrl("Home", "Insert_SessionStorage"),
+            type: "Post",                
+            url: Url.Action("Insert_SessionStorage", "Home"),
             data: JSON.stringify(Sessions),
             success: (d) => {      
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
+                let result = d;
                    
                     $('#Div_Type').removeClass('display_none');
                     $('#Div_Login').addClass('display_none');
@@ -527,7 +521,7 @@ namespace Login {
                     sessionStorage.setItem("BranchCode", txt_Branch.value);    
 
 
-                }
+                
 
             }
         });
@@ -593,13 +587,13 @@ namespace Login {
         $("#div_Emb").html("");
         Details_Employee = new Array<Table_Tim_work>();
         Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Home", "GetAllEmb_InApp"),
+            type: "Get",                 
+            url: Url.Action("GetAllEmb_InApp", "Home"),
             data: { TR_Type: TR_Type, ID_Device: ID_Device, BranchCode: BranchCode },   
             success: (d) => {
-                ;
-                let result = d as BaseResponse;
-                Details_Employee = result.Response as Array<Table_Tim_work>;
+                 
+                let result = d;
+                Details_Employee = result as Array<Table_Tim_work>;
 
 
                 for (var i = 0; i < Details_Employee.length; i++) {
@@ -700,14 +694,13 @@ namespace Login {
 
 
         Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Home", "insert_Table_on_App"),
+            type: "Get",                           
+            url: Url.Action("insert_Table_on_App", "Home"),
             data: { Name: Name, Phone: Phone, Type: Type, Message: "حجز خارجي", TR_Type: Type, ID_Device: ID_Device, BranchCode: BraCode},
             success: (d) => {
 
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    Details_API = result.Response as Array<Table_Hagz>;
+                let result = d;
+                    Details_API = result as Array<Table_Hagz>;
 
 
                     sessionStorage.setItem("TurnNumber", Details_API[0].Num.toString());
@@ -718,7 +711,7 @@ namespace Login {
 
                     Display();
 
-                }
+               
             }
         });
 
@@ -739,13 +732,12 @@ namespace Login {
         TR_Type = sessionStorage.getItem("TR_Type");
 
         Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Home", "Cheack_Num_Confirm"),
+            type: "Get",                       
+            url: Url.Action("Cheack_Num_Confirm", "Home"),
             data: { TrType: TR_Type, ID_Device: ID_Device, BranchCode: BranchCode},
             success: (d) => {
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    let num = result.Response;
+                let result = d;
+                    let num = result;
 
                     if (TR_Type == '1') {
 
@@ -763,7 +755,7 @@ namespace Login {
 
                     $('#Confirm_Num_Dor').html(' في الانتظار : متاح الان ' + num.toString() + '');
 
-                }
+         
 
             }
         });
@@ -778,8 +770,8 @@ namespace Login {
             let ReservationId = sessionStorage.getItem("Id");
 
             Ajax.Callsync({
-                type: "Get",
-                url: sys.apiUrl("Home", "Delete_Cut"),
+                type: "Get",                 
+                url: Url.Action("Delete_Cut", "Home"),
                 data: { ID: ReservationId, ID_Device: ID_Device, BranchCode: BranchCode },
                 success: (d) => {
 
@@ -844,15 +836,14 @@ namespace Login {
         Cuts_Display_App = new Display_App();
         let ID = sessionStorage.getItem("Id");
         Ajax.Callsync({
-            type: "Get",
-            url: sys.apiUrl("Home", "GetAll_App"),
+            type: "Get",                    
+            url: Url.Action("GetAll_App", "Home"),
             data: { TR_Type: TR_Type, ID: ID, ID_Device: ID_Device, BranchCode: BranchCode },
             success: (d) => {
                 debugger;
-                let result = d as BaseResponse;
-                if (result.IsSuccess) {
-                    debugger;
-                    Cuts_Display_App = result.Response as Display_App;
+                let result = d;
+                  
+                    Cuts_Display_App = result as Display_App;
                     GetStat = Cuts_Display_App.GetSts as GetStatus;
                     let id_Corse = 1;
                     Corse_ON_Active();
@@ -899,7 +890,7 @@ namespace Login {
 
 
 
-                }
+              
 
             }
         });

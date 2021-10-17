@@ -86,5 +86,62 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Cheack_Num_Confirm" FunctionName="SamahModel.Store.Cheack_Num_Confirm" />
+    <FunctionImportMapping FunctionImportName="Cheack_Num_Home_App" FunctionName="SamahModel.Store.Cheack_Num_Home_App" />
+    <FunctionImportMapping FunctionImportName="closeDay" FunctionName="SamahModel.Store.closeDay" />
+    <FunctionImportMapping FunctionImportName="Delete_Rows" FunctionName="SamahModel.Store.Delete_Rows" />
+    <FunctionImportMapping FunctionImportName="Enter_Customer" FunctionName="SamahModel.Store.Enter_Customer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SamahModel.Enter_Customer_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="Num" ColumnName="Num" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="cheak" ColumnName="cheak" />
+          <ScalarProperty Name="StatusFlag" ColumnName="StatusFlag" />
+          <ScalarProperty Name="RegistredTime" ColumnName="RegistredTime" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="insert_Table" FunctionName="SamahModel.Store.insert_Table" />
+    <FunctionImportMapping FunctionImportName="insert_Table_on_App" FunctionName="SamahModel.Store.insert_Table_on_App">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SamahModel.insert_Table_on_App_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="Num" ColumnName="Num" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="cheak" ColumnName="cheak" />
+          <ScalarProperty Name="StatusFlag" ColumnName="StatusFlag" />
+          <ScalarProperty Name="RegistredTime" ColumnName="RegistredTime" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="insert_Table_Tim_work" FunctionName="SamahModel.Store.insert_Table_Tim_work" />
+    <FunctionImportMapping FunctionImportName="insert_tw" FunctionName="SamahModel.Store.insert_tw">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SamahModel.insert_tw_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Cheak" ColumnName="Cheak" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PushNotification" FunctionName="SamahModel.Store.PushNotification" />
+    <FunctionImportMapping FunctionImportName="select_Table_Tim_work" FunctionName="SamahModel.Store.select_Table_Tim_work">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SamahModel.select_Table_Tim_work_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Cheak" ColumnName="Cheak" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

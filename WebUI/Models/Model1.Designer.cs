@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\ITC\Mohmed_New_App_Samah\App_BarberShop-main\WebUI\Models\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'F:\ITC\NewAppBarbar2021\WebUI\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

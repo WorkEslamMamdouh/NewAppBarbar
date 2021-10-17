@@ -78,6 +78,57 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Cheak" Type="bit" />
   </EntityType>
+  <Function Name="Cheack_Num_Confirm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TrType" Type="nvarchar" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Cheack_Num_Home_App" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TrType" Type="nvarchar" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="closeDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Delete_Rows" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Enter_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="TR_Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="insert_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="Message" Type="nvarchar" Mode="In" />
+    <Parameter Name="TR_Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="insert_Table_on_App" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="Message" Type="nvarchar" Mode="In" />
+    <Parameter Name="TR_Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="insert_Table_Tim_work" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Cheak" Type="bit" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="insert_tw" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="cheak" Type="bit" Mode="In" />
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PushNotification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="select_Table_Tim_work" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchCode" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="SamahModelStoreContainer">
     <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="G_Branch" EntityType="Self.G_Branch" Schema="dbo" store:Type="Tables" />

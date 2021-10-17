@@ -15,7 +15,6 @@ var Login;
     var Details_Employee = new Array();
     var Details_API = new Array();
     var Details_Check = new Array();
-    var sys = new SystemTools();
     var txtName;
     var txtPhone;
     var PushMessage;
@@ -89,111 +88,106 @@ var Login;
         var ID = sessionStorage.getItem("Id");
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "GetAll_App"),
+            url: Url.Action("GetAll_App", "Home"),
             data: { TR_Type: TR_Type, ID: ID, ID_Device: ID_Device, BranchCode: BranchCode },
             success: function (d) {
                 debugger;
                 var result = d;
-                if (result.IsSuccess) {
-                    debugger;
-                    Cuts_Display_App = result.Response;
-                    GetStat = Cuts_Display_App.GetSts;
-                    var id_Corse = 1;
-                    Corse_ON_Active();
-                    for (var i = 0; i < Cuts_Display_App.Table_Hagz.length; i++) {
-                        if (Cuts_Display_App.Table_Hagz[i].cheak == true) {
-                            Corse_Is_Active(id_Corse, Cuts_Display_App.Table_Hagz, i);
-                            id_Corse++;
-                            flag_corse = true;
-                        }
+                Cuts_Display_App = result;
+                GetStat = Cuts_Display_App.GetSts;
+                var id_Corse = 1;
+                Corse_ON_Active();
+                for (var i = 0; i < Cuts_Display_App.Table_Hagz.length; i++) {
+                    if (Cuts_Display_App.Table_Hagz[i].cheak == true) {
+                        Corse_Is_Active(id_Corse, Cuts_Display_App.Table_Hagz, i);
+                        id_Corse++;
+                        flag_corse = true;
                     }
-                    $('#label_Num').html(GetStat.TrNo.toString());
-                    var message = 'باقي علي دورك : ' + GetStat.StatusName.toString() + '';
-                    if (message == $('#Home_Num_Dor').html()) {
-                        sessionStorage.setItem("CheakBranch", "");
+                }
+                $('#label_Num').html(GetStat.TrNo.toString());
+                var message = 'باقي علي دورك : ' + GetStat.StatusName.toString() + '';
+                if (message == $('#Home_Num_Dor').html()) {
+                    sessionStorage.setItem("CheakBranch", "");
+                }
+                else {
+                    sessionStorage.setItem("CheakBranch", "true");
+                }
+                $('#Home_Num_Dor').html(message);
+                if (GetStat.StatusName == "لقد انتهيت من الحلاقه نشكرك علي زيارتك") {
+                    var page = sessionStorage.getItem("page");
+                    if (page == '5') {
+                        alert('لقد انتهيت من الحلاقه نشكرك علي زيارتك');
+                        $('#Home_Num_Dor').html('لقد انتهيت من الحلاقه نشكرك علي زيارتك');
+                        sessionStorage.setItem("page", "2");
+                        sessionStorage.setItem("TR_Type", "");
+                        sessionStorage.setItem("Id", "");
+                        LoadPage();
                     }
-                    else {
-                        sessionStorage.setItem("CheakBranch", "true");
-                    }
-                    $('#Home_Num_Dor').html(message);
-                    if (GetStat.StatusName == "لقد انتهيت من الحلاقه نشكرك علي زيارتك") {
-                        var page = sessionStorage.getItem("page");
-                        if (page == '5') {
-                            alert('لقد انتهيت من الحلاقه نشكرك علي زيارتك');
-                            $('#Home_Num_Dor').html('لقد انتهيت من الحلاقه نشكرك علي زيارتك');
-                            sessionStorage.setItem("page", "2");
-                            sessionStorage.setItem("TR_Type", "");
-                            sessionStorage.setItem("Id", "");
-                            LoadPage();
-                        }
-                    }
-                    if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
-                        var page = sessionStorage.getItem("page");
-                        if (page == '5') {
-                            alert('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري');
-                            $('#Home_Num_Dor').html('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري');
-                            sessionStorage.setItem("page", "2");
-                            sessionStorage.setItem("TR_Type", "");
-                            sessionStorage.setItem("Id", "");
-                            LoadPage();
-                        }
+                }
+                if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
+                    var page = sessionStorage.getItem("page");
+                    if (page == '5') {
+                        alert('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري');
+                        $('#Home_Num_Dor').html('الحجز الخاص بك غير موجود الرجاء الحجز مره اخري');
+                        sessionStorage.setItem("page", "2");
+                        sessionStorage.setItem("TR_Type", "");
+                        sessionStorage.setItem("Id", "");
+                        LoadPage();
                     }
                 }
             }
         });
     }
     function Get_Branch() {
+        debugger;
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "GetBranch"),
+            url: Url.Action("GetBranch", "Home"),
             success: function (d) {
+                debugger;
                 var result = d;
-                if (result.IsSuccess) {
-                    Branch = result.Response;
-                    DocumentActions.FillCombowithdefult(Branch, txt_Branch, "BranchCode", "NameA", "اختار الفرع");
-                }
+                Branch = result;
+                DocumentActions.FillCombowithdefult(Branch, txt_Branch, "BranchCode", "NameA", "اختار الفرع");
             }
         });
     }
     function Get_Uesr_Session() {
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "Get_Uesr_Session"),
+            url: Url.Action("Get_Uesr_Session", "Home"),
             data: { ID_Device: ID_Device },
             success: function (d) {
                 var result = d;
-                if (result.IsSuccess) {
-                    SessionStorages = result.Response;
-                    debugger;
-                    if (SessionStorages.length > 0) {
-                        sessionStorage.setItem("BranchCode", "" + SessionStorages[0].BranchCode + "");
-                        sessionStorage.setItem("Name", SessionStorages[0].Name);
-                        sessionStorage.setItem("Phone", SessionStorages[0].Phone);
-                        sessionStorage.setItem("page", "" + SessionStorages[0].page + "");
-                        sessionStorage.setItem("TR_Type", SessionStorages[0].TR_Type);
-                        sessionStorage.setItem("TurnNumber", "" + SessionStorages[0].TurnNumber + "");
-                        sessionStorage.setItem("ServiceId", "" + SessionStorages[0].ServiceId + "");
-                        sessionStorage.setItem("Id", "" + SessionStorages[0].Id_Cust + "");
-                        txtName.value = SessionStorages[0].Name.toString();
-                        txtPhone.value = SessionStorages[0].Phone.toString();
-                        txt_Branch.value = SessionStorages[0].BranchCode.toString();
-                        BranchCode = SessionStorages[0].BranchCode;
-                        if (SessionStorages[0].Phone == null) {
-                            sessionStorage.setItem("page", "2");
-                            LoadPage();
-                        }
-                        else {
-                            LoadPage();
-                        }
-                    }
-                    else {
-                        txt_Branch.selectedIndex = 0;
-                        BranchCode = Number(txt_Branch.value);
-                        sessionStorage.setItem("page", "1");
-                        txtName.value = '';
-                        txtPhone.value = '';
+                SessionStorages = result;
+                debugger;
+                if (SessionStorages.length > 0) {
+                    sessionStorage.setItem("BranchCode", "" + SessionStorages[0].BranchCode + "");
+                    sessionStorage.setItem("Name", SessionStorages[0].Name);
+                    sessionStorage.setItem("Phone", SessionStorages[0].Phone);
+                    sessionStorage.setItem("page", "" + SessionStorages[0].page + "");
+                    sessionStorage.setItem("TR_Type", SessionStorages[0].TR_Type);
+                    sessionStorage.setItem("TurnNumber", "" + SessionStorages[0].TurnNumber + "");
+                    sessionStorage.setItem("ServiceId", "" + SessionStorages[0].ServiceId + "");
+                    sessionStorage.setItem("Id", "" + SessionStorages[0].Id_Cust + "");
+                    txtName.value = SessionStorages[0].Name.toString();
+                    txtPhone.value = SessionStorages[0].Phone.toString();
+                    txt_Branch.value = SessionStorages[0].BranchCode.toString();
+                    BranchCode = SessionStorages[0].BranchCode;
+                    if (SessionStorages[0].Phone == null) {
+                        sessionStorage.setItem("page", "2");
                         LoadPage();
                     }
+                    else {
+                        LoadPage();
+                    }
+                }
+                else {
+                    txt_Branch.selectedIndex = 0;
+                    BranchCode = Number(txt_Branch.value);
+                    sessionStorage.setItem("page", "1");
+                    txtName.value = '';
+                    txtPhone.value = '';
+                    LoadPage();
                 }
             }
         });
@@ -218,13 +212,11 @@ var Login;
     function cheakcloseDay() {
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "cheakcloseDay"),
+            url: Url.Action("cheakcloseDay", "Home"),
             data: { BranchCode: Number(txt_Branch.value) },
             success: function (d) {
                 var result = d;
-                if (result.IsSuccess) {
-                    close = result.Response;
-                }
+                close = result;
             }
         });
     }
@@ -330,24 +322,22 @@ var Login;
         BranchCode = Number(txt_Branch.value);
         Ajax.Callsync({
             type: "Post",
-            url: sys.apiUrl("Home", "Insert_SessionStorage"),
+            url: Url.Action("Insert_SessionStorage", "Home"),
             data: JSON.stringify(Sessions),
             success: function (d) {
                 var result = d;
-                if (result.IsSuccess) {
-                    $('#Div_Type').removeClass('display_none');
-                    $('#Div_Login').addClass('display_none');
-                    $('#Div_Confirm').addClass('display_none');
-                    $('#Div_Home').addClass('display_none');
-                    $('#Div_Employess').addClass('display_none');
-                    $('#butBack').removeClass('display_none');
-                    $('#butRemove').addClass('display_none');
-                    $('#txt_titel').html('أختر نوع الخدمة');
-                    sessionStorage.setItem("page", "2");
-                    sessionStorage.setItem("Name", txtName.value);
-                    sessionStorage.setItem("Phone", txtPhone.value);
-                    sessionStorage.setItem("BranchCode", txt_Branch.value);
-                }
+                $('#Div_Type').removeClass('display_none');
+                $('#Div_Login').addClass('display_none');
+                $('#Div_Confirm').addClass('display_none');
+                $('#Div_Home').addClass('display_none');
+                $('#Div_Employess').addClass('display_none');
+                $('#butBack').removeClass('display_none');
+                $('#butRemove').addClass('display_none');
+                $('#txt_titel').html('أختر نوع الخدمة');
+                sessionStorage.setItem("page", "2");
+                sessionStorage.setItem("Name", txtName.value);
+                sessionStorage.setItem("Phone", txtPhone.value);
+                sessionStorage.setItem("BranchCode", txt_Branch.value);
             }
         });
     }
@@ -384,12 +374,11 @@ var Login;
         Details_Employee = new Array();
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "GetAllEmb_InApp"),
+            url: Url.Action("GetAllEmb_InApp", "Home"),
             data: { TR_Type: TR_Type, ID_Device: ID_Device, BranchCode: BranchCode },
             success: function (d) {
-                ;
                 var result = d;
-                Details_Employee = result.Response;
+                Details_Employee = result;
                 for (var i = 0; i < Details_Employee.length; i++) {
                     BuildControls(i);
                     $('#id_' + i).val(Details_Employee[i].ID);
@@ -445,18 +434,16 @@ var Login;
         var BraCode = sessionStorage.getItem("BranchCode");
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "insert_Table_on_App"),
+            url: Url.Action("insert_Table_on_App", "Home"),
             data: { Name: Name, Phone: Phone, Type: Type, Message: "حجز خارجي", TR_Type: Type, ID_Device: ID_Device, BranchCode: BraCode },
             success: function (d) {
                 var result = d;
-                if (result.IsSuccess) {
-                    Details_API = result.Response;
-                    sessionStorage.setItem("TurnNumber", Details_API[0].Num.toString());
-                    sessionStorage.setItem("ServiceId", Details_API[0].Type.toString());
-                    sessionStorage.setItem("Id", Details_API[0].ID.toString());
-                    $('#label_Num').html(Details_API[0].Num.toString());
-                    Display();
-                }
+                Details_API = result;
+                sessionStorage.setItem("TurnNumber", Details_API[0].Num.toString());
+                sessionStorage.setItem("ServiceId", Details_API[0].Type.toString());
+                sessionStorage.setItem("Id", Details_API[0].ID.toString());
+                $('#label_Num').html(Details_API[0].Num.toString());
+                Display();
             }
         });
     }
@@ -469,24 +456,22 @@ var Login;
         TR_Type = sessionStorage.getItem("TR_Type");
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "Cheack_Num_Confirm"),
+            url: Url.Action("Cheack_Num_Confirm", "Home"),
             data: { TrType: TR_Type, ID_Device: ID_Device, BranchCode: BranchCode },
             success: function (d) {
                 var result = d;
-                if (result.IsSuccess) {
-                    var num = result.Response;
-                    if (TR_Type == '1') {
-                        if (num == -1) {
-                            num = 'يمكنك الدخول';
-                        }
+                var num = result;
+                if (TR_Type == '1') {
+                    if (num == -1) {
+                        num = 'يمكنك الدخول';
                     }
-                    else {
-                        if (num == -1) {
-                            num = 'يمكنك الدخول';
-                        }
-                    }
-                    $('#Confirm_Num_Dor').html(' في الانتظار : متاح الان ' + num.toString() + '');
                 }
+                else {
+                    if (num == -1) {
+                        num = 'يمكنك الدخول';
+                    }
+                }
+                $('#Confirm_Num_Dor').html(' في الانتظار : متاح الان ' + num.toString() + '');
             }
         });
     }
@@ -496,7 +481,7 @@ var Login;
             var ReservationId = sessionStorage.getItem("Id");
             Ajax.Callsync({
                 type: "Get",
-                url: sys.apiUrl("Home", "Delete_Cut"),
+                url: Url.Action("Delete_Cut", "Home"),
                 data: { ID: ReservationId, ID_Device: ID_Device, BranchCode: BranchCode },
                 success: function (d) {
                     sessionStorage.setItem("page", "2");
@@ -534,36 +519,33 @@ var Login;
         var ID = sessionStorage.getItem("Id");
         Ajax.Callsync({
             type: "Get",
-            url: sys.apiUrl("Home", "GetAll_App"),
+            url: Url.Action("GetAll_App", "Home"),
             data: { TR_Type: TR_Type, ID: ID, ID_Device: ID_Device, BranchCode: BranchCode },
             success: function (d) {
                 debugger;
                 var result = d;
-                if (result.IsSuccess) {
-                    debugger;
-                    Cuts_Display_App = result.Response;
-                    GetStat = Cuts_Display_App.GetSts;
-                    var id_Corse = 1;
-                    Corse_ON_Active();
-                    for (var i = 0; i < Cuts_Display_App.Table_Hagz.length; i++) {
-                        if (Cuts_Display_App.Table_Hagz[i].cheak == true) {
-                            Corse_Is_Active(id_Corse, Cuts_Display_App.Table_Hagz, i);
-                            id_Corse++;
-                            flag_corse = true;
-                        }
+                Cuts_Display_App = result;
+                GetStat = Cuts_Display_App.GetSts;
+                var id_Corse = 1;
+                Corse_ON_Active();
+                for (var i = 0; i < Cuts_Display_App.Table_Hagz.length; i++) {
+                    if (Cuts_Display_App.Table_Hagz[i].cheak == true) {
+                        Corse_Is_Active(id_Corse, Cuts_Display_App.Table_Hagz, i);
+                        id_Corse++;
+                        flag_corse = true;
                     }
-                    $('#label_Num').html(GetStat.TrNo.toString());
-                    $('#Home_Num_Dor').html('باقي علي دورك : ' + GetStat.StatusName.toString() + '');
-                    if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
-                        var page = sessionStorage.getItem("page");
-                        if (page == '5') {
-                            alert('الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري');
-                            $('#Home_Num_Dor').html('باقي علي دورك : يمكنك الدخول');
-                            sessionStorage.setItem("page", "2");
-                            sessionStorage.setItem("TR_Type", "");
-                            sessionStorage.setItem("Id", "");
-                            LoadPage();
-                        }
+                }
+                $('#label_Num').html(GetStat.TrNo.toString());
+                $('#Home_Num_Dor').html('باقي علي دورك : ' + GetStat.StatusName.toString() + '');
+                if (GetStat.StatusName == "الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري") {
+                    var page = sessionStorage.getItem("page");
+                    if (page == '5') {
+                        alert('الحجز الخاص بك غير موجود او تم الانتهتء من الخدمة الرجاء الحجز مره اخري');
+                        $('#Home_Num_Dor').html('باقي علي دورك : يمكنك الدخول');
+                        sessionStorage.setItem("page", "2");
+                        sessionStorage.setItem("TR_Type", "");
+                        sessionStorage.setItem("Id", "");
+                        LoadPage();
                     }
                 }
             }
